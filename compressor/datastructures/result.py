@@ -10,17 +10,17 @@ class Result(NamedTuple):
     """
     Defines properties of processed image
     """
-    hadExif: bool
-    hasExif: bool
-    finalColors: int
-    finalFormat: str
-    finalMode: str
-    finalSize: int
-    image: str
-    initialColors: int
+    imageSource: str
     initialFormat: str
-    initialMode: int
+    finalFormat: str
+    initialMode: str
+    finalMode: str
+    initialColors: int
+    finalColors: int
     initialSize: int
-    optimized: bool
+    finalSize: int
+    compressed: bool
     downsized: bool
+    exifBefore: bool
+    exifNow: bool
     displayConfig: DisplayConfiguration
