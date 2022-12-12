@@ -11,6 +11,7 @@ class Input(NamedTuple):
     Defines attributes of input image to be processed
     """
     imageSource: str
+    imagedestination: str
     imageQuality: int
     maxWidth: int
     maxHeight: int

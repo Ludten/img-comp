@@ -61,14 +61,15 @@ def jpegQuality(image: Image.Image, dynamic: bool = True) -> Tuple[int, float]:
     desired = 0.992
     high = DEFAULT_IMAGE_QUALITY
     low = high - 5
+    pic = image.resize((400, 400))
     if not dynamic:
-        defaultDiffrence = getQualityDiffrence(image, high)
+        defaultDiffrence = getQualityDiffrence(pic, high)
         return high, defaultDiffrence
-    normalDifference = getQualityDiffrence(image, 95)
+    normalDifference = getQualityDiffrence(pic, 95)
     selectedDifference = selectedQuality = None
     for _ in range(bstIterCount(low, high)):
         currentQuality = (low + high) // 2
-        currentDifference = getQualityDiffrence(image, currentQuality)
+        currentDifference = getQualityDiffrence(pic, currentQuality)
         differenceRatio = currentDifference / normalDifference
         if differenceRatio >= desired:
             selectedQuality = currentQuality
@@ -79,5 +80,5 @@ def jpegQuality(image: Image.Image, dynamic: bool = True) -> Tuple[int, float]:
     if selectedQuality:
         return selectedQuality, selectedDifference
     else:
-        defaultDiffrence = getQualityDiffrence(image, high)
+        defaultDiffrence = getQualityDiffrence(pic, high)
         return high, defaultDiffrence

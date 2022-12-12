@@ -22,7 +22,7 @@ from compressor.reports.report import readable, fileStatus, finalReport, display
 from compressor.exceptions import KeyboardInterupt, ImagesNotFoundError, InvalidPathError
 
 
-def execute(imagePath, quality, width, height,
+def execute(src, dest, quality, width, height,
             keepExif, grayScale, compareSize, displayConfig):
     """
     Define execution sequence
@@ -34,9 +34,9 @@ def execute(imagePath, quality, width, height,
     # skipped = 0
     totalImageSize = 0
     bytesSaved = 0
-    if os.path.isfile(imagePath):
+    if os.path.isfile(src):
         found = 1 
-        image = Input(imagePath, quality, width, height,
+        image = Input(src, dest, quality, width, height,
                       keepExif, grayScale, compareSize, displayConfig)
         result = compress(image)
         totalImageSize = result.initialSize

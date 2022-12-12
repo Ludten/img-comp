@@ -59,7 +59,8 @@ def compressJPEG(input: Input) -> Result:
     finalMode = image.mode
     image.close()
     compareSize = not input.compareSize
-    compressed, finalSize = save(input.imageSource, buffer, compareSize)
+    compressed, finalSize = save(input.imageSource, buffer,
+                                 compareSize, output=input.imagedestination)
     return Result(input.imageSource, initalFormat, finalFormat, initialMode,
             finalMode, initialColors, finalColors, initialSize, finalSize,
             compressed, downsized, exifBefore, exifNow, input.displayConfig)

@@ -23,9 +23,13 @@ def arguments():
 
     parser = ArgumentParser(description=description)
 
-    helpPath = 'The path to the image file to be processed'
+    helpSrc = 'The path to the image file to be processed'
     
-    parser.add_argument("src", nargs="?", type=str, help=helpPath)
+    parser.add_argument("src", nargs="?", type=str, help=helpSrc)
+
+    helpDest = 'The destination path of the compressed image'
+
+    parser.add_argument("dst", nargs="?", type=str, help=helpDest)
     
     helpSupportedFormat = "Displays a list of supported image formats by the software"
     
@@ -50,11 +54,13 @@ def arguments():
     generalGroup.add_argument("-mh", "--max-height", dest="maxHeight",
         type=int, default=0, help="Maximum height in pixels")
     
-    generalGroup.add_argument("-gs", "--grayscale", dest="grayScale", action="store_true", help="Convert grayscale")
+    generalGroup.add_argument("-gs", "--grayscale",
+        dest="grayScale", action="store_true", help="Convert grayscale")
     
     helpNoComparison = "Do not compare the initial and final image, but save the final image"
     
-    generalGroup.add_argument("-nc", "--no-comparison", dest="noComparison", action="store_true", help=helpNoComparison)
+    generalGroup.add_argument("-nc", "--no-comparison",
+        dest="noComparison", action="store_true", help=helpNoComparison)
 
     jpegGroup = parser.add_argument_group("JPEG specific options",
         description="These options apply only to JPEG images")
@@ -70,12 +76,15 @@ def arguments():
 
     args = parser.parse_args()
 
-    if args.supportedFormats:
-        parser.exit(status=0, message=supportedFormats())
     if args.src:
         sourcePath = os.path.expanduser(args.src)
     else:
-        parser.exit(status=0, message="\nPlease specify the path of the image to be processed\n")
+        parser.exit(status=1, message="\nError: Requires image source path\n\n")
+
+    destinationPath = os.path.expanduser(args.dst) if args.dst else ""
+
+    if args.supportedFormats:
+        parser.exit(status=0, message=supportedFormats())
 
     if not args.imageQuality:
         args.imageQuality = DEFAULT_IMAGE_QUALITY
@@ -86,5 +95,6 @@ def arguments():
         parser.exit(status=0, message="\nImage dimensions should be positive integers\n")
 
     displayConfig = DisplayConfiguration(args.summary, args.progress, args.silent)
-    return sourcePath, args.imageQuality, args.maxWidth, args.maxHeight, \
-           args.keepExif, args.grayScale, args.noComparison, displayConfig
+    
+    return sourcePath, destinationPath, args.imageQuality, args.maxWidth, \
+           args.maxHeight, args.keepExif, args.grayScale, args.noComparison, displayConfig
