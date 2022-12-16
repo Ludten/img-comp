@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import logo from "../assets/img/mencomp_logo.svg"
 import "../assets/css/header.css"
 
 const Header = ()=>{
@@ -22,7 +23,7 @@ const Header = ()=>{
               <h3 className="text-lg font-normal">ABOUT</h3>
             </a>
             <a href="/project">
-              <button className="text-lg w-40 text-center h-10 bg-[#FF725E] border rounded-md font-normal">GET STARTED</button>
+              <button className="text-lg w-40 text-center h-10 bg-[#AAC2E4] border rounded-md font-normal">GET STARTED</button>
             </a>
           </div>
           <div className="block sm:hidden">

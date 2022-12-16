@@ -1,8 +1,9 @@
+import LandingS1 from "./landingS1"
 
 const Landing = ()=>{
 	return(
 		<main>
-			This is landing page.
+      <LandingS1/>
 		</main>
 	)
 }

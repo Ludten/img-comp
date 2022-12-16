@@ -1,12 +1,20 @@
 import { createBrowserRouter } from "react-router-dom"
 import type { RouteObject } from "react-router-dom"
-import { Landing } from "../pages/main"
+import { Landing, About, Feature } from "../pages/main"
 
 
 const routes: RouteObject[] = [
 	{
 		path:"/",
 		element: <Landing />
+	},
+  {
+		path:"/about",
+		element: <About />
+	},
+  {
+		path:"/features",
+		element: <Feature />
 	}
 ]
 
