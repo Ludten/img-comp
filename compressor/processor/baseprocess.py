@@ -58,3 +58,16 @@ def save(source: str, buffer: BytesIO, compareSizes: bool,
         compressed = False
         finalSize = initialSize
     return compressed, finalSize
+
+
+def removeAlphaTransprency(image: Image.Image) -> Image.Image:
+    """
+    Removes the alpha transparency from PNG images when converting to JPEG
+    """
+    if image.mode in ["LA", "RGBA"] or \
+            ("transparency" in image.info and image.mode == "P"):
+        initialImage = image.convert("RGBA")
+        imageBackground = Image.new("RGBA", initialImage.size, (255, 255, 255))
+        image = Image.alpha_composite(imageBackground, initialImage)
+        return image.convert("RGB")
+    return image

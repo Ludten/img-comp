@@ -7,6 +7,7 @@ from PIL import Image
 
 from compressor.datastructures.input import Input
 from compressor.datastructures.result import Result
+from compressor.compression.pngcompression import compressPNG
 from compressor.compression.jpegcompression import compressJPEG
 
 
@@ -21,6 +22,8 @@ def compress(input: Input) -> Result:
             imageMode: str = image.mode
         if imageFormat in ("JPEG"):
             return compressJPEG(input)
+        if imageFormat in ("PNG"):
+            return compressPNG(input)
     except OSError:
         return Result(imageSource=input.imageSource,
                       initialFormat="", finalFormat="",

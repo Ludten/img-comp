@@ -23,7 +23,7 @@ from compressor.exceptions import KeyboardInterupt, ImagesNotFoundError, Invalid
 
 
 def execute(src, dest, quality, width, height,
-            keepExif, grayScale, compareSize, displayConfig):
+            keepExif, convert, grayScale, compareSize, displayConfig):
     """
     Define execution sequence
     """
@@ -37,7 +37,7 @@ def execute(src, dest, quality, width, height,
     if os.path.isfile(src):
         found = 1 
         image = Input(src, dest, quality, width, height,
-                      keepExif, grayScale, compareSize, displayConfig)
+                      keepExif, convert, grayScale, compareSize, displayConfig)
         result = compress(image)
         totalImageSize = result.initialSize
         if result.compressed:

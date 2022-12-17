@@ -16,6 +16,7 @@ class Input(NamedTuple):
     maxWidth: int
     maxHeight: int
     keepExif: bool
+    convert: bool
     grayScale: bool
     compareSize: bool
     displayConfig: DisplayConfiguration
