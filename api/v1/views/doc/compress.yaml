@@ -1,0 +1,48 @@
+Compress a JPEG or PNG image
+---
+parameters:
+  - name: Payload
+    in: body
+    schema:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          format: binary
+          description: jpeg or png image to be compressed
+        width:
+          type: integer
+          description: desired maximum height of the image
+        height:
+          type: integer
+          description: desired maximum width of the image
+        grayScale:
+          type: boolean
+          description: make the image a grayscale image
+        quality:
+          type: integer
+          description: desired final quality of the image
+        keepExif:
+          type: boolean
+          description: keep exchangeable image file
+definitions:
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+responses:
+  201:
+    description: compressed, Image was successful compressed
+  400:
+    description: Bad request, Invalid client input in request body
+    schema:
+      $ref: '#/definitions/Error'
+    examples:
+      message: 'No file in the request'
+  500:
+    description: server error
+    schema:
+      $ref: '#/definitions/Error'
